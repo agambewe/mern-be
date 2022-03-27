@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: mern-be
-  replicas: 5
+  replicas: 2
   template:
     metadata:
       labels:
@@ -17,10 +17,20 @@ spec:
     spec:
       containers:
       - name: mern-be
-        image: agambewe/mern-be-staging:latest
+        image: agambewe/mern-be:latest
         imagePullPolicy: Always
+        env:
+            - name: REACT_APP_BASE_URL
+              value: "https://stag-be.bewe.tech"
         ports:
         - containerPort: 4000
+        resources:
+            limits:
+              cpu: 700m
+              memory: 800Mi
+            requests:
+              cpu: 200m
+              memory: 400Mi
 
 ---
 
@@ -30,7 +40,7 @@ metadata:
   name: mern-be-service
   namespace: staging
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: mern-be
   ports:
