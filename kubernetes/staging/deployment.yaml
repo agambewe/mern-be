@@ -18,10 +18,7 @@ spec:
       containers:
       - name: mern-be
         image: agambewe/mern-be:latest
-        imagePullPolicy: Always
-        env:
-            - name: REACT_APP_BASE_URL
-              value: "https://stag-be.bewe.tech"
+        # imagePullPolicy: Always
         ports:
         - containerPort: 4000
         resources:
